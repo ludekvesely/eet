@@ -1,5 +1,5 @@
 FROM tutum/lamp:latest
-ADD . /app
+RUN rm -fr /app && git clone https://github.com/ludekvesely/eet.git /app
 EXPOSE 80 3306
 ENV APPLICATION_ENV production
 ENV MYSQL_PASS admin
