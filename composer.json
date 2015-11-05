@@ -1,0 +1,16 @@
+{
+	"name": "ludekvesely/eet",
+	"description": "FIS VSE 4IT445 - EET",
+	"minimum-stability": "stable",
+	"license": "",
+	"authors": [
+		{
+			"name": "Ludek Vesely",
+			"email": "ludek.vesely@email.com"
+		}
+	],
+	"require": {
+		"zendframework/zendframework1": "1.12.16",
+		"tracy/tracy": "^2.3"
+	}
+}

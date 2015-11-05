@@ -1,0 +1,7 @@
+/composer.phar
+*~
+*.swp
+!.gitignore
+!.htaccess
+/.idea
+/vendor/*
