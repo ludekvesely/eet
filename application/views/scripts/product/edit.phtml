@@ -1,0 +1,13 @@
+<h2><?php echo $this->escape($this->title); ?></h2>
+<?php
+	echo $this->form;
+?>
+
+<?php if ($this->productId) { ?>
+<form action="<?php echo $this->url(
+	array('controller' => 'product',
+		'action' => 'delete',
+		'id' => $this->productId),
+	'default',
+	true) ?>" method="post"><input class="submit btn btn-lg btn-danger btn-block" type="submit" value="Archivovat" />
+<?php } ?>

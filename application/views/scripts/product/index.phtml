@@ -1,0 +1,28 @@
+<div class="container">
+	<h2><?php echo $this->escape($this->title); ?></h2>
+	<div class="container-fluid">
+		<div class="list-group product">
+			<a href="<?php echo $this->url(
+				array('controller' => 'product',
+					'action' => 'edit',
+				),
+				'default',
+				true) ?>" class="list-group-item active product-text">
+				Přidat produkt
+			</a>
+		</div>
+		<?php foreach ($this->products as $product) { ?>
+			<div class="list-group product" >
+				<a href="<?php echo $this->url(
+					array('controller' => 'product',
+						'action' => 'edit',
+						'id' => $product->getId()),
+					'default',
+					true) ?>" class="list-group-item product-text">
+					<?php echo $this->escape($product->getName()); ?>
+				</a>
+			</div>
+		<?php } ?>
+	</div>
+</div>
+<div>

@@ -5,8 +5,9 @@
  */
 class HomeController extends Zend_Controller_Action
 {
+
 	public function indexAction()
 	{
-		$this->view->title = 'Přihlášení OK';
+		$this->view->title = sprintf('Vítej uživateli %s', Zend_Auth::getInstance()->getIdentity());
 	}
 }
