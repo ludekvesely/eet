@@ -8,10 +8,10 @@ class LoginForm extends Zend_Form
 	public function init()
 	{
 		$this->setMethod(self::METHOD_POST);
-		$this->setAttrib('class', 'form-signin');
+		$this->setAttrib('class', 'form');
 
 		$user = $this->createElement('text', 'username');
-		$user->setLabel('Login');
+		$user->setLabel('Uživatelské jméno');
 		$user->addFilter('StringTrim');
 		$user->setRequired(true);
 		$user->setAttrib('class', 'form-control');

@@ -4,7 +4,7 @@
 ?>
 
 <?php if ($this->productId) { ?>
-<form action="<?php echo $this->url(
+<form class="form-delete-control" action="<?php echo $this->url(
 	array('controller' => 'product',
 		'action' => 'delete',
 		'id' => $this->productId),

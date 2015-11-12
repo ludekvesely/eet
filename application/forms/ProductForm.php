@@ -4,7 +4,7 @@ class ProductForm extends Zend_Form {
 
 	public function init() {
 		$this->setMethod(self::METHOD_POST);
-		$this->setAttrib('class', 'form-signin');
+		$this->setAttrib('class', 'form');
 
 		$name = $this->createElement('text', 'name');
 		$name->setLabel('Název produktu');
