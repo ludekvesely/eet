@@ -3,4 +3,12 @@
 		<h2><?php echo $this->escape($this->title); ?></h2>
 	</div>
 	<?php echo $this->loginform; ?>
+
+	<a href="<?php echo $this->url(
+		array('controller' => 'registration'),
+		'default',
+		true) ?>">
+		Registrovat se
+	</a>
+
 </div>

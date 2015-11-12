@@ -97,7 +97,7 @@ class Application_Plugin_DbAuth extends Zend_Controller_Plugin_Abstract
 		);
 		$form = new LoginForm;
 		if (!$form->isValid($request->getPost())) {
-			$this->redirectFailed(['Please fill the login form']);
+			$this->redirectFailed(['Vyplňte prosím formulář.']);
 		}
 		$username = $form->getValue($this->loginField);
 		$password = $form->getValue($this->passwordField) . self::SALT;
@@ -117,6 +117,8 @@ class Application_Plugin_DbAuth extends Zend_Controller_Plugin_Abstract
 	 */
 	private function redirectSuccess()
 	{
+		$flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+		$flash->clearMessages();
 		$this->redirector->gotoSimpleAndExit($this->successAction, $this->successController);
 	}
 

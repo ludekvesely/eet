@@ -10,6 +10,14 @@ class IndexController extends Zend_Controller_Action
 	 */
 	public function indexAction()
 	{
+		$auth = Zend_Auth::getInstance();
+		if($auth->hasIdentity()) {
+			$this->_helper->redirector->gotoRoute(array('controller' => 'home',
+				'action' => 'index'),
+				'default',
+				true);
+		}
+
 		$this->view->title = 'Přihlášení do EET';
 		$this->view->loginform = new LoginForm;
 		$this->view->signin = TRUE;
