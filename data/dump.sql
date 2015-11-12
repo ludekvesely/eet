@@ -35,3 +35,18 @@ INSERT INTO `products` (`id`, `name`, `unit`, `price`, `archivated`, `user_id`) 
 (2,	'Koláč',	'Kus',	25,	0,	1),
 (3,	'Zmrzlina',	'Kopeček',	15,	0,	1),
 (4,	'Pivo',	'Půlitr',	38,	1,	1);
+
+DROP TABLE IF EXISTS `stores`;
+CREATE TABLE `stores` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `identification_number` varchar(20) DEFAULT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_id` (`user_id`),
+  CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `stores` (`id`, `name`, `address`, `identification_number`, `user_id`) VALUES
+(1,	'Království stánků',	'Praha 1',	'56235663',	1);

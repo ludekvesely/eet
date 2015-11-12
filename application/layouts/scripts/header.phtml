@@ -17,10 +17,25 @@
 				Produkty
 			</a>
 		</li>
-		<li role="presentation" >
-			<a href="#">
-				Nastavení
+		<li role="presentation" class="right">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				Nastavení <span class="caret"></span>
 			</a>
+			<ul class="dropdown-menu right">
+				<li role="presentation" >
+					<a href="#">
+						Osobních údajů
+					</a>
+				</li>
+				<li role="presentation" >
+					<a href="<?php echo $this->url(
+						array('controller' => 'store'),
+						'default',
+						true) ?>">
+						Prodejního místa
+					</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </div>

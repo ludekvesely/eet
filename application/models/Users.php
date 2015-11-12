@@ -12,7 +12,10 @@ class Users extends My_Db_Table  {
      */
     protected $_rowClass = 'User';
 
-    protected $_dependentTables = array('Products');
+    protected $_dependentTables = [
+        'Products',
+        'Stores',
+    ];
 
     /**
      * @return User
