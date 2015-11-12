@@ -23,7 +23,10 @@
 			</a>
 			<ul class="dropdown-menu right">
 				<li role="presentation" >
-					<a href="#">
+					<a href="<?php echo $this->url(
+						array('controller' => 'user', 'action' => 'edit'),
+						'default',
+						true) ?>">
 						Osobních údajů
 					</a>
 				</li>

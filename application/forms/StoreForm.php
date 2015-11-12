@@ -19,7 +19,7 @@ class StoreForm extends Zend_Form {
 		$address->addFilter('StringTrim');
 		$address->setRequired(true);
 		$address->setAttrib('class', 'form-control');
-		$address->setAttrib('placeholder', 'adresa');
+		$address->setAttrib('placeholder', 'Adresa');
 		$this->addElement($address);
 
 		$identificationNumber = $this->createElement('text', 'identification_number');

@@ -29,4 +29,25 @@ class User extends My_Db_Table_Row {
 		return (count($store) !== 0)  ? $store[0] : null;
 	}
 
+	/**
+	 * @param mixed[] $values
+	 * @return User
+	 */
+	public function updateFromArray($values)
+	{
+		$this->setFromArray($values);
+		$this->save();
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function toArray()
+	{
+		$values = parent::toArray();
+		return $values;
+	}
+
 }
