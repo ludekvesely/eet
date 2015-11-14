@@ -32,3 +32,8 @@ mysql -u root --password=abc < migrations/dump.sql
 
 
 5) Profit!
+
+
+## Produkční prostředí
+
+Aplikace je veřejně dostupná [pod touto url](http://eet.ludekvesely.cz:8089).

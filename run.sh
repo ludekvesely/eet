@@ -15,10 +15,19 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> Done!"
 else
     echo "=> Using an existing volume of MySQL"
-    echo "=> Importing dump.sql ..."
-    sleep 10
-	mysql -u admin --password=admin --default-character-set=utf8 < /app/data/dump.sql
-	echo "=> Done!"
 fi
+
+echo "=> Importing dump.sql ..."
+/usr/bin/mysqld_safe > /dev/null 2>&1 &
+RET=1
+while [[ RET -ne 0 ]]; do
+	echo "=> Waiting for confirmation of MySQL service startup"
+	sleep 5
+	mysql -uroot -e "status" > /dev/null 2>&1
+	RET=$?
+done
+mysql -u admin --password=admin --default-character-set=utf8 < /app/data/dump.sql
+mysqladmin -uroot shutdown
+echo "=> Done!"
 
 exec supervisord -n
