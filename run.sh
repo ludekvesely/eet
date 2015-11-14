@@ -11,10 +11,14 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> Creating admin user ..."
     /create_mysql_admin_user.sh
     echo "=> Importing dump.sql ..."
-	mysql -u admin --password=admin < data/dump.sql
+	mysql -u admin --password=admin --default-character-set=utf8 < /app/data/dump.sql
     echo "=> Done!"
 else
     echo "=> Using an existing volume of MySQL"
+    echo "=> Importing dump.sql ..."
+    sleep 10
+	mysql -u admin --password=admin --default-character-set=utf8 < /app/data/dump.sql
+	echo "=> Done!"
 fi
 
 exec supervisord -n

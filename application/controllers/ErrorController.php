@@ -13,7 +13,7 @@ class ErrorController extends Zend_Controller_Action
 	{
 		$this->view->signin = TRUE;
 		$errors = $this->_getParam('error_handler');
-		if (APPLICATION_ENV == 'development') {
+		if (1 || APPLICATION_ENV == 'development') {
 			throw $errors->exception;
 		} else {
 			switch ($errors->type) {

@@ -5,3 +5,5 @@
 !.htaccess
 /.idea
 /vendor/*
+/log/*
+!/log/.htaccess

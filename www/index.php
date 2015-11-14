@@ -16,7 +16,7 @@ if (!defined('APPLICATION_ENV')) {
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Tracy\Debugger;
-Debugger::enable();
+Debugger::enable(Debugger::DETECT, __DIR__ . '/../log');
 
 $application = new Zend_Application(
 	APPLICATION_ENV,
