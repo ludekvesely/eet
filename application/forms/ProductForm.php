@@ -30,6 +30,11 @@ class ProductForm extends Zend_Form {
 		$price->setAttrib('placeholder', 'Cena za jednotku');
 		$this->addElement($price);
 
+		$stored = $this->createElement('checkbox', 'stored');
+		$stored->setLabel('Skladová evidence');
+		$stored->setAttrib('class', 'form-control');
+		$this->addElement($stored);
+
 		$this->addElement('submit', 'add', array(
 			'ignore' => true,
 			'class' => 'submit btn btn-lg btn-success btn-block',
