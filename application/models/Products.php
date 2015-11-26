@@ -19,7 +19,7 @@ class Products extends My_Db_Table {
     public function findById($id)
     {
         $product = $this->getById($id);
-        if (!$product) {
+        if (!$product || $product->getUserId() !== My_Model::get('Users')->getUser()->getId()) {
             return null;
         }
         return $product->getArchivated() ? null : $product;
