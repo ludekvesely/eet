@@ -19,7 +19,23 @@ class Products extends My_Db_Table {
     public function findById($id)
     {
         $product = $this->getById($id);
+        if (!$product) {
+            return null;
+        }
         return $product->getArchivated() ? null : $product;
+    }
+
+    /**
+     * @return Product|null
+     */
+    public function findStored()
+    {
+        return $this->fetchAll(
+            [
+                'user_id = ?' => My_Model::get('Users')->getUser()->getId(),
+                'stored = ?' => true,
+            ]
+        );
     }
 
     /**

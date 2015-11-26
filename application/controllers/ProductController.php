@@ -46,6 +46,11 @@ class ProductController extends Zend_Controller_Action {
 					$product = My_Model::get('Products')->createRow();
 					$product->setUserId(My_Model::get('Users')->getUser()->getId());
 				}
+
+				if (!$formValues['stored']) {
+					$formValues['count'] = 0;
+				}
+
 				$product->updateFromArray($formValues);
 
 				$this->_helper->flashMessenger->addMessage("Změny byly uloženy.");
