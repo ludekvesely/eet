@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Prague');
+
 set_include_path(implode(PATH_SEPARATOR, [
 	realpath(__DIR__ . '/../library'),
 	get_include_path(),

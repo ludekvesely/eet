@@ -8,7 +8,8 @@
 						'action' => 'add',
 						'id' => $product->getId()),
 					'default',
-					true) ?>" class="list-group-item product-text">
+					true) ?>" class="list-group-item product-text <?php if ($product->count <= 0) echo 'disabled'; ?>"
+				>
 					<?php echo $this->escape($product->getName()) . ': ' . $this->escape($product->getPrice() . ' Kč'); ?>
 				</a>
 			</div>

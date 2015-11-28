@@ -60,3 +60,22 @@ CREATE TABLE `stores` (
 INSERT INTO `stores` (`id`, `name`, `address`, `identification_number`, `user_id`) VALUES
 (1,	'Království stánků',	'Praha 1',	'56235663',	1);
 
+DROP TABLE IF EXISTS `sales`;
+CREATE TABLE `sales` (id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT);
+ALTER TABLE `sales` ADD `user_id` INT(11)  UNSIGNED  NOT NULL  AFTER `id`;
+ALTER TABLE `sales` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sales` ADD `date` DATETIME  NOT NULL  AFTER `user_id`;
+
+DROP TABLE IF EXISTS `sales_products`;
+CREATE TABLE `sales_products` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `sales_id` int(11) unsigned NOT NULL,
+  `products_id` int(11) unsigned NOT NULL,
+  `amount` int(3) unsigned NOT NULL,
+  `unit_price` decimal(5,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `sales_products` ADD FOREIGN KEY (`sales_id`) REFERENCES `sales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sales_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `products` CHANGE `price` `price` DECIMAL(5,2)  UNSIGNED  NOT NULL;
+
