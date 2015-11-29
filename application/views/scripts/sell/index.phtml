@@ -6,7 +6,8 @@
 				<a href="<?php echo $this->url(
 					array('controller' => 'sell',
 						'action' => 'add',
-						'id' => $product->getId()),
+						'id' => $product->getId(),
+						'saleId' => $this->saleId),
 					'default',
 					true) ?>" class="list-group-item product-text <?php if ($product->count <= 0) echo 'disabled'; ?>"
 				>

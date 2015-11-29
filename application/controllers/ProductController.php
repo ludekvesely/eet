@@ -16,7 +16,7 @@ class ProductController extends Zend_Controller_Action {
 		$productId = $this->_request->getParam('id');
 		if (!empty($productId))
 		{
-			$product = My_Model::get('Products')->findByIdfindById($productId);
+			$product = My_Model::get('Products')->findById($productId);
 			if ($product === null) {
 				$this->_helper->redirector->gotoRoute(array('controller' => 'product',
 					'action' => 'index'),

@@ -7,6 +7,7 @@ class SellController extends Zend_Controller_Action {
 		$user = My_Model::get('Users')->getUser();
 		$this->view->title = 'Prodej';
 		$this->view->products = $user->getProducts();
+		$this->view->saleId = $this->_getParam('saleId');
 	}
 
 	public function addAction()
@@ -23,10 +24,14 @@ class SellController extends Zend_Controller_Action {
 				$select = My_Model::get('Users')->select()->where('username = ?', $auth->getIdentity());
 				$userId = My_Model::get('Users')->fetchRow($select)->id;
 
-				$saleId = My_Model::get('Sales')->insert([
-					'user_id' => $userId,
-					'date' => (new \DateTime)->format('Y-m-d h:i:s')
-				]);
+				if ($this->_getParam('saleId')) {
+					$saleId = $this->_getParam('saleId');
+				} else {
+					$saleId = My_Model::get('Sales')->insert([
+						'user_id' => $userId,
+						'date' => (new \DateTime)->format('Y-m-d h:i:s')
+					]);
+				}
 
 				$product = My_Model::get('Products')->find($this->_getParam('id'))->current();
 
@@ -48,8 +53,8 @@ class SellController extends Zend_Controller_Action {
 
 			}
 
-			$this->_helper->redirector->gotoRoute(array('controller' => 'receipt',
-				'action' => 'index'),
+			$this->_helper->redirector->gotoRoute(
+				array('controller' => 'sell', 'action' => 'receipt', 'saleId' => $saleId),
 				'default',
 				true);
 
@@ -57,6 +62,40 @@ class SellController extends Zend_Controller_Action {
 
 		$this->view->title = 'Množství produktu';
 		$this->view->form = $form;
+	}
+
+	public function receiptAction()
+	{
+		$this->view->title = 'Prodej';
+		$this->view->products = My_Model::get('Sales')->getProducts($this->_getParam('saleId'));
+		$this->view->saleId = $this->_getParam('saleId');
+	}
+
+	public function removeAction()
+	{
+		$table = My_Model::get('SalesProducts');
+		$where = $table->getAdapter()->quoteInto('id = ?', $this->_getParam('salesProductsId'));
+		$table->delete($where);
+		$this->_helper->redirector->gotoRoute(
+			array('controller' => 'sell', 'action' => 'receipt', 'saleId' => $this->_getParam('saleId')),
+			'default',
+			true);
+	}
+
+	public function cancelAction()
+	{
+		// rm...
+		$this->_helper->flashMessenger->addMessage('Prodej byl zrušen');
+		$this->_helper->redirector->gotoRoute(
+			array('controller' => 'sell', 'action' => 'index'),
+			'default',
+			true);
+	}
+
+	public function doneAction()
+	{
+		$this->view->title = 'Paragon';
+		$this->view->products = My_Model::get('Sales')->getProducts($this->_getParam('saleId'));
 	}
 
 }
