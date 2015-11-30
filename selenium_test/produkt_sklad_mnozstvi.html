@@ -4,38 +4,49 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://eet.ludekvesely.cz:8089/" />
-<title>prihlaseni</title>
+<title>produkt_sklad_nozstvi</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">prihlaseni</td></tr>
+<tr><td rowspan="1" colspan="3">produkt_sklad_nozstvi</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>http://eet.ludekvesely.cz:8089/</td>
+	<td>/sell</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=username</td>
-	<td>test</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password</td>
-	<td>test</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>id=Přihlásit</td>
+	<td>link=Domů</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Vítej uživateli test</td>
+	<td>clickAndWait</td>
+	<td>link=Sklad</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'testproduktnazev:')])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=count</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>class=alert alert-info</td>
+	<td>Změny byly uloženy.</td>
+</tr>
+
 </tbody></table>
 </body>
 </html>
