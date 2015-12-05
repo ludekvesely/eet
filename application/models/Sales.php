@@ -36,4 +36,17 @@ class Sales extends My_Db_Table  {
         return $ret;
     }
 
+    /**
+     * @param $id
+     * @return Sale|null
+     */
+    public function findById($id)
+    {
+        $sale = $this->getById($id);
+        if (!$sale || $sale->getUserId() !== My_Model::get('Users')->getUser()->getId()) {
+            return null;
+        }
+        return $sale;
+    }
+
 }

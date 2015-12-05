@@ -11,13 +11,28 @@
 					Domů
 				</a>
 			</li>
-			<li role="presentation" >
-				<a href="<?php echo $this->url(
-						array('controller' => 'sell'),
-						'default',
-						true) ?>">
-					Prodej
+			<li role="presentation" class="right">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					Prodej <span class="caret"></span>
 				</a>
+				<ul class="dropdown-menu right">
+					<li role="presentation" >
+						<a href="<?php echo $this->url(
+								array('controller' => 'sell'),
+								'default',
+								true) ?>">
+							Nový prodej
+						</a>
+					</li>
+					<li role="presentation" >
+						<a href="<?php echo $this->url(
+								array('controller' => 'sell', 'action' => 'sold-list'),
+								'default',
+								true) ?>">
+							Vystavené paragony
+						</a>
+					</li>
+				</ul>
 			</li>
 			<li role="presentation" >
 				<a href="<?php echo $this->url(

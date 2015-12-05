@@ -1,0 +1,20 @@
+<div class="container">
+	<h2><?php echo $this->escape($this->title); ?></h2>
+	<div class="container-fluid">
+		<?php foreach ($this->sales as $sale) { ?>
+			<div class="list-group product" >
+				<a href="<?php echo $this->url(
+						array('controller' => 'sell',
+								'action' => 'sold',
+								'id' => $sale->getId(),
+						),
+						'default',
+						true) ?>" class="list-group-item product-text"
+				>
+					<?php echo $this->escape($sale->getId()) . ': ' . $this->escape($sale->getDate()); ?>
+				</a>
+			</div>
+		<?php } ?>
+	</div>
+</div>
+<div>

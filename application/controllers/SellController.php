@@ -98,4 +98,40 @@ class SellController extends Zend_Controller_Action {
 		$this->view->products = My_Model::get('Sales')->getProducts($this->_getParam('saleId'));
 	}
 
+	public function soldListAction()
+	{
+		$user = My_Model::get('Users')->getUser();
+		$this->view->title = 'Vystavené paragony';
+		$this->view->sales = My_Model::get('Sales')->fetchAll([
+			'user_id = ?' => $user->getId(),
+		]);
+
+	}
+
+	public function soldAction()
+	{
+		$sale = null;
+		$saleId = $this->_request->getParam('id');
+
+		if (!empty($saleId))
+		{
+			$sale = My_Model::get('Sales')->findById($saleId);
+			if ($sale === null) {
+				$this->_helper->redirector->gotoRoute(array('controller' => 'sell',
+						'action' => 'sold-list'),
+						'default',
+						true);
+			}
+		}
+		else {
+			$this->_helper->redirector->gotoRoute(array('controller' => 'sell',
+					'action' => 'sold-list'),
+					'default',
+					true);
+		}
+		$this->view->title = 'Vystavený paragon';
+		$this->view->sale = $sale;
+		$this->view->products = My_Model::get('Sales')->getProducts($saleId);
+	}
+
 }
