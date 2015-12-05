@@ -26,9 +26,6 @@ class LoginForm extends Zend_Form
 		$pass->setRequired(true);
 		$pass->setAttrib('class', 'form-control');
 		$pass->setAttrib('placeholder', 'Heslo');
-		$pass->setDecorators([
-				['ViewHelper', ['helper' => 'formText']], ['Label', ['class' => 'sr-only']]
-		]);
 		$this->addElement($pass);
 
 		$this->addElement('hidden', 'login', ['value' => 1]);
