@@ -34,6 +34,7 @@ class Products extends My_Db_Table {
             [
                 'user_id = ?' => My_Model::get('Users')->getUser()->getId(),
                 'stored = ?' => true,
+                'archivated = ?' => false,
             ]
         );
     }
