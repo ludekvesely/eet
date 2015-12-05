@@ -134,7 +134,7 @@ class Application_Plugin_DbAuth extends Zend_Controller_Plugin_Abstract
 		foreach ($messages as $msg) {
 			$flash->addMessage($msg);
 		}
-		$this->redirector->gotoSimpleAndExit($this->failedAction, $this->failedController, null, array('login-failed' => 1));
+		$this->redirector->gotoSimpleAndExit($this->failedAction, $this->failedController, null, []);
 	}
 
 	/**
