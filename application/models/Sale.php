@@ -4,7 +4,7 @@ class Sale extends My_Db_Table_Row {
 
 	/**
 	 * @param mixed[] $values
-	 * @return Store
+	 * @return Sale
 	 */
 	public function updateFromArray($values)
 	{

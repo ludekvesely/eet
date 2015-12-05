@@ -26,11 +26,24 @@ class SellController extends Zend_Controller_Action {
 
 				if ($this->_getParam('saleId')) {
 					$saleId = $this->_getParam('saleId');
+
 				} else {
-					$saleId = My_Model::get('Sales')->insert([
-						'user_id' => $userId,
-						'date' => (new \DateTime)->format('Y-m-d h:i:s')
+
+
+					$sale = My_Model::get('Sales')->fetchAll([
+						'active = ?' => true,
+						'user_id = ?' => My_Model::get('Users')->getUser()->getId(),
 					]);
+
+					if (count($sale) !== 0) {
+						$saleId = $sale[0]->getId();
+
+					} else {
+						$saleId = My_Model::get('Sales')->insert([
+								'user_id' => $userId,
+								'date' => (new \DateTime)->format('Y-m-d h:i:s')
+						]);
+					}
 				}
 
 				$product = My_Model::get('Products')->find($this->_getParam('id'))->current();
@@ -73,6 +86,17 @@ class SellController extends Zend_Controller_Action {
 
 	public function removeAction()
 	{
+		$saleProduct = My_Model::get('SalesProducts')->fetchAll([
+			'id = ?' => $this->_getParam('salesProductsId'),
+		])[0];
+
+		$product = My_Model::get('Products')->fetchAll([
+			'id = ?' => $saleProduct->getProductsId(),
+		])[0];
+
+		$product->setCount($product->getCount() + $saleProduct->getAmount());
+		$product->save();
+
 		$table = My_Model::get('SalesProducts');
 		$where = $table->getAdapter()->quoteInto('id = ?', $this->_getParam('salesProductsId'));
 		$table->delete($where);
@@ -84,7 +108,26 @@ class SellController extends Zend_Controller_Action {
 
 	public function cancelAction()
 	{
-		// rm...
+		$saleProducts = My_Model::get('SalesProducts')->fetchAll([
+			'sales_id = ?' => $this->_getParam('saleId'),
+		]);
+
+		foreach ($saleProducts as $saleProduct) {
+			$product = My_Model::get('Products')->fetchAll([
+				'id = ?' => $saleProduct->getProductsId(),
+			])[0];
+			$product->setCount($product->getCount() + $saleProduct->getAmount());
+			$product->save();
+
+			$table = My_Model::get('SalesProducts');
+			$where = $table->getAdapter()->quoteInto('id = ?', $saleProduct->getId());
+			$table->delete($where);
+		}
+
+		$table = My_Model::get('Sales');
+		$where = $table->getAdapter()->quoteInto('id = ?', $this->_getParam('saleId'));
+		$table->delete($where);
+
 		$this->_helper->flashMessenger->addMessage('Prodej byl zrušen');
 		$this->_helper->redirector->gotoRoute(
 			array('controller' => 'sell', 'action' => 'index'),
@@ -95,6 +138,13 @@ class SellController extends Zend_Controller_Action {
 	public function doneAction()
 	{
 		$this->view->title = 'Paragon';
+
+		$sale = My_Model::get('Sales')->fetchAll([
+			'id = ?' => $this->_getParam('saleId'),
+		])[0];
+		$sale->setActive(false);
+		$sale->save();
+
 		$this->view->products = My_Model::get('Sales')->getProducts($this->_getParam('saleId'));
 	}
 

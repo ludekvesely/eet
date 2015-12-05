@@ -2,7 +2,7 @@
 
 <a href="<?php echo $this->url(
 				array('controller' => 'sell', 'action' => 'done', 'saleId' => $this->saleId),
-				'default', true) ?>" class="submit btn btn-lg btn-success btn-block">Dokončit prodej</a>
+				'default', true) ?>" class="submit btn btn-lg btn-success btn-block <?php if (count($this->products) <= 0) echo 'disabled'; ?>">Dokončit prodej</a>
 <a href="<?php echo $this->url(
 				array('controller' => 'sell', 'action' => 'index', 'saleId' => $this->saleId),
 				'default', true) ?>" class="submit btn btn-lg btn-primary btn-block">Přidat produkt</a>

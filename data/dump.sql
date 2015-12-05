@@ -61,10 +61,13 @@ INSERT INTO `stores` (`id`, `name`, `address`, `identification_number`, `user_id
 (1,	'Království stánků',	'Praha 1',	'56235663',	1);
 
 DROP TABLE IF EXISTS `sales`;
-CREATE TABLE `sales` (id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT);
+CREATE TABLE `sales` (
+  id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
 ALTER TABLE `sales` ADD `user_id` INT(11)  UNSIGNED  NOT NULL  AFTER `id`;
 ALTER TABLE `sales` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `sales` ADD `date` DATETIME  NOT NULL  AFTER `user_id`;
+ALTER TABLE `sales` ADD `active` TINYINT(4) NOT NULL  DEFAULT '1' AFTER `user_id`;
 
 DROP TABLE IF EXISTS `sales_products`;
 CREATE TABLE `sales_products` (
