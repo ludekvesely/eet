@@ -51,14 +51,15 @@ CREATE TABLE `stores` (
   `name` varchar(100) DEFAULT NULL,
   `address` varchar(150) DEFAULT NULL,
   `identification_number` varchar(20) DEFAULT NULL,
+  `tax_identification_number` varchar(20) DEFAULT NULL,
   `user_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_id` (`user_id`),
   CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `stores` (`id`, `name`, `address`, `identification_number`, `user_id`) VALUES
-(1,	'Království stánků',	'Praha 1',	'56235663',	1);
+INSERT INTO `stores` (`id`, `name`, `address`, `identification_number`, `tax_identification_number`, `user_id`) VALUES
+(1,	'Království stánků',	'Praha 1',	'56235663',	'65555544',	1);
 
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE `sales` (

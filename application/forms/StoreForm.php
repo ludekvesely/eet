@@ -23,12 +23,20 @@ class StoreForm extends Zend_Form {
 		$this->addElement($address);
 
 		$identificationNumber = $this->createElement('text', 'identification_number');
-		$identificationNumber->setLabel('IČO');
+		$identificationNumber->setLabel('IČ');
 		$identificationNumber->addFilter('StringTrim');
 		$identificationNumber->setRequired(true);
 		$identificationNumber->setAttrib('class', 'form-control');
 		$identificationNumber->setAttrib('placeholder', 'IČO');
 		$this->addElement($identificationNumber);
+
+		$taxIdentificationNumber = $this->createElement('text', 'tax_identification_number');
+		$taxIdentificationNumber->setLabel('DIČ');
+		$taxIdentificationNumber->addFilter('StringTrim');
+		$taxIdentificationNumber->setRequired(false);
+		$taxIdentificationNumber->setAttrib('class', 'form-control');
+		$taxIdentificationNumber->setAttrib('placeholder', 'DIČ');
+		$this->addElement($taxIdentificationNumber);
 
 		$this->addElement('submit', 'add', array(
 			'ignore' => true,
