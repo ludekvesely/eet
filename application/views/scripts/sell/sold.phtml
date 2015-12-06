@@ -1,25 +1,46 @@
-<h2><?php echo $this->escape($this->title); ?></h2>
+<div class="container">
+	<h2><?php echo $this->escape($this->title); ?></h2>
 
-<br>
-<table class="table">
-	<thead>
-	<td>Produkt</td>
-	<td>Množství</td>
-	<td>Cena</td>
-	</thead>
-<?php foreach ($this->products as $product) { ?>
-	<tr>
-		<td>
-			<?php echo $this->escape($product['name']); ?>
-		</td>
-		<td>
-			<?php echo $this->escape($product['amount']) . ' ' . $this->escape($product['unit']); ?>
-		</td>
-		<td>
-			<?php echo $this->escape($product['unit_price'] * $product['amount']); ?>
-		</td>
-	</tr>
-<?php } ?>
-</table>
+	<br>
 
-<p>Vystaveno dne: <?php echo $this->sale->getDate(); ?></p>
+	<div id="receipt">
+
+
+		<p>Název: <?php echo $this->escape($this->store->getName()); ?></p>
+		<p>Adresa: <?php echo $this->escape($this->store->getAddress()); ?></p>
+		<p>IČ: <?php echo $this->escape($this->store->getIdentificationNumber()); ?></p>
+		<p>DIČ: <?php echo $this->escape($this->store->getTaxIdentificationNumber()); ?></p>
+		<p>Vystaveno dne: <?php
+				$date = new DateTime($this->sale->getDate());
+				echo $date->format('d. m. Y - H:i:s');
+			?>
+		</p>
+		<table class="table">
+			<thead>
+			<td>Produkt</td>
+			<td>Množství</td>
+			<td>Cena</td>
+			</thead>
+		<?php
+			$sum = 0;
+			foreach ($this->products as $product) {
+				$sum += $product['unit_price'] * $product['amount']; ?>
+			<tr>
+				<td>
+					<?php echo $this->escape($product['name']); ?>
+				</td>
+				<td>
+					<?php echo $this->escape($product['amount']) . ' ' . $this->escape($product['unit']); ?>
+				</td>
+				<td>
+					<?php echo $this->escape($product['unit_price'] * $product['amount']) . ' Kč'; ?>
+				</td>
+			</tr>
+		<?php } ?>
+		</table>
+		<p>Celková cena: <?php echo $this->escape($sum); ?> Kč</p>
+	</div>
+
+	<br>
+	<input type="button" value="Tisk" class="btn btn-lg btn-primary btn-block" onclick="window.print()" />
+</div class="container">

@@ -167,6 +167,7 @@ class SellController extends Zend_Controller_Action {
 		$this->view->title = 'Vystavené paragony';
 		$this->view->sales = My_Model::get('Sales')->fetchAll([
 			'user_id = ?' => $user->getId(),
+			'active = ?' => false,
 		]);
 
 	}
@@ -195,6 +196,9 @@ class SellController extends Zend_Controller_Action {
 		$this->view->title = 'Vystavený paragon';
 		$this->view->sale = $sale;
 		$this->view->products = My_Model::get('Sales')->getProducts($saleId);
+		$this->view->store = My_Model::get('Stores')->fetchAll([
+			'user_id = ?' => My_Model::get('Users')->getUser()->getId(),
+		])[0];
 	}
 
 }

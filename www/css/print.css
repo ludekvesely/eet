@@ -1,0 +1,14 @@
+@media print
+{
+	body * {
+		visibility: hidden;
+	}
+
+	#receipt * {
+		visibility: visible;
+	}
+
+	#receipt {
+		position: absolute; top: 40px; left: 30px;
+	}
+}
