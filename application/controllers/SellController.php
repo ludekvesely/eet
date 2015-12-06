@@ -100,6 +100,19 @@ class SellController extends Zend_Controller_Action {
 		$table = My_Model::get('SalesProducts');
 		$where = $table->getAdapter()->quoteInto('id = ?', $this->_getParam('salesProductsId'));
 		$table->delete($where);
+
+		$saleProducts = My_Model::get('SalesProducts')->fetchAll([
+			'sales_id = ?' => $this->_getParam('saleId'),
+		]);
+
+		if (count($saleProducts) === 0) {
+			$this->_helper->flashMessenger->addMessage('Na účtence není žádný produkt. Zvolte prosím jiný.');
+			$this->_helper->redirector->gotoRoute(
+				array('controller' => 'sell', 'action' => 'index', 'saleId' => $this->_getParam('saleId')),
+				'default',
+				true);
+		}
+
 		$this->_helper->redirector->gotoRoute(
 			array('controller' => 'sell', 'action' => 'receipt', 'saleId' => $this->_getParam('saleId')),
 			'default',
