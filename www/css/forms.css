@@ -48,3 +48,31 @@
 	padding: 0 15px;
 	margin: 0 auto;
 }
+
+.slow-group {
+    text-align: center;
+    margin-left: -40px;
+
+}
+
+.slow-group li {
+    list-style-type: none;
+}
+
+.slow-group li input {
+    text-align: center;
+    width: 200px;
+    margin-bottom: 10px;
+
+}
+
+.slow-group li input#amount {
+    height: 50px;
+    font-size: 30px;
+}
+
+#more-amount {
+    display: block;
+    margin: 0px auto;
+    width: 200px;
+}
