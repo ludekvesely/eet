@@ -17,9 +17,9 @@
 
 	<body>
 
-		<div class="container">
+		<?php echo $this->render('header.phtml') ?>
 
-			<?php echo $this->render('header.phtml') ?>
+        <div class="container">
 
 			<?php
 			$messages = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->getMessages();
