@@ -87,3 +87,10 @@ ALTER TABLE `users` ADD `api_token` VARCHAR(50)  NULL  DEFAULT NULL  AFTER `tax_
 ALTER TABLE `users` ADD UNIQUE INDEX (`api_token`);
 UPDATE `users` SET `api_token` = '9Cis92B3zsbdDMdmwi82HnnwkjwJWK9dwjwdmdw10SMdmskW8' WHERE `id` = '1';
 ALTER TABLE `sales` ADD `exported` TINYINT(1)  UNSIGNED  NOT NULL  DEFAULT '0'  AFTER `date`;
+
+CREATE TABLE `requests` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `request` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
