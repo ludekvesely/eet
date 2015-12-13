@@ -35,4 +35,9 @@ class Users extends My_Db_Table  {
         return null;
     }
 
+    public function getByToken($token)
+    {
+        return $this->fetchRow(['api_token = ?' => $token]);
+    }
+
 }

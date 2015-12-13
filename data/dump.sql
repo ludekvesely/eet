@@ -83,3 +83,7 @@ ALTER TABLE `sales_products` ADD FOREIGN KEY (`sales_id`) REFERENCES `sales` (`i
 ALTER TABLE `sales_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE `products` CHANGE `price` `price` DECIMAL(5,2)  UNSIGNED  NOT NULL;
 
+ALTER TABLE `users` ADD `api_token` VARCHAR(50)  NULL  DEFAULT NULL  AFTER `tax_payer`;
+ALTER TABLE `users` ADD UNIQUE INDEX (`api_token`);
+UPDATE `users` SET `api_token` = '9Cis92B3zsbdDMdmwi82HnnwkjwJWK9dwjwdmdw10SMdmskW8' WHERE `id` = '1';
+ALTER TABLE `sales` ADD `exported` TINYINT(1)  UNSIGNED  NOT NULL  DEFAULT '0'  AFTER `date`;

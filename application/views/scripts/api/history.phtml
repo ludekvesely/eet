@@ -1,0 +1,28 @@
+<h2><?php echo $this->escape($this->title); ?></h2>
+
+<ul class="nav nav-tabs">
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'index']); ?>">Dokumentace</a></li>
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'run']); ?>">Spuštění exportu</a></li>
+	<li role="presentation" class="active"><a href="<?php echo $this->url(['action' => 'history']); ?>">Historie volání</a></li>
+</ul>
+
+
+<h3>Historie volání API</h3>
+<br>
+
+<table class="table table-bordered">
+	<thead style="font-weight: bold">
+		<td>ID</td>
+		<td>Uživatel</td>
+		<td>Parametry</td>
+	</thead>
+	<tbody>
+	<?php foreach ($this->requests as $request) { ?>
+		<tr>
+			<td><?php echo $this->escape($request->id); ?></td>
+			<td><?php echo $this->escape($request->user_id); ?></td>
+			<td><?php echo $this->escape($request->request); ?></td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>

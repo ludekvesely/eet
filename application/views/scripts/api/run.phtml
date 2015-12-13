@@ -1,0 +1,33 @@
+<h2><?php echo $this->escape($this->title); ?></h2>
+
+<ul class="nav nav-tabs">
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'index']); ?>">Dokumentace</a></li>
+	<li role="presentation" class="active"><a href="<?php echo $this->url(['action' => 'run']); ?>">Spuštění exportu</a></li>
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'history']); ?>">Historie volání</a></li>
+</ul>
+
+
+<h3>Spuštění exportu</h3>
+<br>
+
+<?php if (isset($this->exported)) { ?>
+<div class="alert alert-info">
+	Úspěšně exportováno <?php echo $this->escape($this->exported); ?> paragonů<br>
+	Počet chyb: <?php echo count($this->failed); ?><br>
+	<?php if (count($this->failed)) { ?>
+		Chyby:<br>
+		<ul>
+			<?php foreach ($this->failed as $id => $err) { ?>
+				<li>#<?php echo $this->escape($id); ?> <?php echo $this->escape($err); ?></li>
+			<?php } ?>
+		</ul>
+	<?php } ?>
+</div>
+<a class="btn btn-lg btn-primary" href="<?php echo $this->url(['action' => 'run', 'export' => NULL]); ?>">
+	Zpět
+</a>
+<?php } else { ?>
+<a class="btn btn-lg btn-success" href="<?php echo $this->url(['action' => 'run', 'export' => 1]); ?>">
+	Exportovat <?php echo $this->escape($this->ready); ?> paragonů
+</a>
+<?php } ?>

@@ -15,6 +15,7 @@
 				echo $date->format('d. m. Y - H:i:s');
 			?>
 		</p>
+		<p>ID exportu MFČR: <?php if ($this->sale->exported) { echo $this->escape($this->sale->exported); } else { echo 'Dosud neexportováno'; } ?></p>
 		<table class="table">
 			<thead>
 			<td>Produkt</td>

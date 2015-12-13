@@ -49,4 +49,9 @@ class Sales extends My_Db_Table  {
         return $sale;
     }
 
+    public function getQueued()
+    {
+        return $this->fetchAll(['exported = 0']);
+    }
+
 }

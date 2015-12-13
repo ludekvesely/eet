@@ -155,7 +155,7 @@ class SellController extends Zend_Controller_Action {
 		$sale = My_Model::get('Sales')->fetchAll([
 			'id = ?' => $this->_getParam('saleId'),
 		])[0];
-		$sale->setActive(false);
+		$sale->setActive(0);
 		$sale->save();
 
 		$this->view->products = My_Model::get('Sales')->getProducts($this->_getParam('saleId'));

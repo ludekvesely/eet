@@ -1,0 +1,83 @@
+<h2><?php echo $this->escape($this->title); ?></h2>
+
+<ul class="nav nav-tabs">
+	<li role="presentation" class="active"><a href="<?php echo $this->url(['action' => 'index']); ?>">Dokumentace</a></li>
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'run']); ?>">Spuštění exportu</a></li>
+	<li role="presentation"><a href="<?php echo $this->url(['action' => 'history']); ?>">Historie volání</a></li>
+</ul>
+
+
+<h3>Vystavení dokladu</h3>
+<br>
+
+<p>Odeslání vystaveného dokladu na API ministerstva. Data jsou odeslána metodou POST ve formátu JSON.</p>
+
+<pre>POST <?php echo $this->serverUrl() . $this->url(['action' => 'create']); ?></pre>
+<br>
+
+<h4>Parametry</h4>
+
+<table class="table table-bordered">
+	<thead style="font-weight: bold">
+		<td>Název</td>
+		<td>Typ</td>
+		<td>Popis</td>
+	</thead>
+	<tbody>
+	<tr>
+		<td>token</td>
+		<td>string</td>
+		<td>Token uživatele obdržený při registraci</td>
+	</tr>
+	<tr>
+		<td>date</td>
+		<td>string</td>
+		<td>Datum vystavení dokladu ve formátu 'YYYY-MM-DD'</td>
+	</tr>
+	<tr>
+		<td>number</td>
+		<td>string</td>
+		<td>Číslo vystaveného dokladu</td>
+	</tr>
+	<tr>
+		<td>price</td>
+		<td>float</td>
+		<td>Celková cena dokladu</td>
+	</tr>
+	</tbody>
+</table>
+
+<pre><?php echo json_encode([
+	'token' => 'ma9dsj0KSDcpJS82vdNJWgQi0',
+	'date' => '2015-12-21',
+	'number' => '1392811',
+	'price' => 102.9
+], JSON_PRETTY_PRINT); ?></pre>
+<br>
+
+<h4>Odpověď serveru</h4>
+
+<table class="table table-bordered">
+	<thead style="font-weight: bold">
+	<td>Název</td>
+	<td>Typ</td>
+	<td>Popis</td>
+	</thead>
+	<tbody>
+	<tr>
+		<td>status</td>
+		<td>integer</td>
+		<td>Výsledek volání (200 OK, 400 BAD_REQUEST, 401 UNAUTHORIZED, 50X ERROR)</td>
+	</tr>
+	<tr>
+		<td>message</td>
+		<td>string</td>
+		<td>ID odpovědi nebo popis chyby</td>
+	</tr>
+	</tbody>
+</table>
+
+<pre><?php echo json_encode([
+	'status' => 200,
+	'message' => '18293231'
+], JSON_PRETTY_PRINT); ?></pre>
