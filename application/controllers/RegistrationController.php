@@ -53,6 +53,7 @@ class RegistrationController extends Zend_Controller_Action
 				$users->insert([
 					'username' => $username,
 					'password' => $password,
+					'api_token' => md5(time())
 				]);
 
 				$this->_helper->flashMessenger->addMessage('Registrace proběhla v pořádku. Nyní se můžete přihlásit.');
